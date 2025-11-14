@@ -36,7 +36,7 @@ project/assembly_name="Avatars vs Rooks"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-firebase/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-firebase/plugin.cfg", "res://addons/gut/plugin.cfg")
 
 [filesystem]
 
