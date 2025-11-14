@@ -29,9 +29,11 @@ func _physics_process(delta: float) -> void:
 	if estado_actual != estado_previo:
 		match estado_actual:
 			CAMINAR:
-				animacion.play("caminar")
+				#animacion.play("caminar")
+				pass
 			ATACAR:
-				animacion.play("atacar")
+				#animacion.play("atacar")
+				pass
 		estado_previo = estado_actual
 		
 	if estado_actual == CAMINAR:
@@ -73,7 +75,7 @@ func recibir_ataque(cantidad: float):
 		Global.agregar_monedas(75)
 		queue_free()
 		return
-	animacion_impacto.play("impacto")
+	#animacion_impacto.play("impacto")
 
 func _on_end_line_detector_area_entered(area: Area2D) -> void:
 	perder_nivel()
