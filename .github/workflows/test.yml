@@ -1,0 +1,24 @@
+name: CI Godot Tests
+
+on:
+  push:
+    branches:
+      - KendallPruebasUnitarias # Cambia por el nombre real de tu branch
+  pull_request:
+    branches:
+      - KendallPruebasUnitarias
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Instala Godot y dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip xvfb
+          wget https://downloads.tuxfamily.org/godotengine/4.5.0/Godot_v4.5-stable_linux.x86_64.zip
+          unzip Godot_v4.5-stable_linux.x86_64.zip -d godot
+          chmod +x godot/Godot_v4.5-stable_linux.x86_64
+      - name: Ejecuta tests GUT
+        run: xvfb-run godot/Godot_v4.5-stable_linux.x86_64 --headless --script addons/gut/gut_cmdln.gd -gdir=res://tests/
