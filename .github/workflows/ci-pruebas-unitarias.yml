@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Build (importar proyecto en Godot 4.5.1)
+    name: Build (verificar proyecto Godot)
     runs-on: ubuntu-22.04
 
     steps:
@@ -21,10 +21,11 @@ jobs:
         uses: chickensoft-games/setup-godot@v2
         with:
           version: 4.5.1
-          use-dotnet: false
-      - name: Import project (headless)
+          use-dotnet: false   # binario de editor sin .NET :contentReference[oaicite:0]{index=0}
+
+      - name: Open project (headless editor)
         run: |
-          godot --headless --path . --import --quit
+          godot --headless --editor --path . --quit
 
   test:
     name: Run GUT tests
@@ -46,10 +47,7 @@ jobs:
           GODOT_DISABLE_LEAK_CHECKS: "1"
         run: >
           godot --headless
-          --display-driver headless
-          --audio-driver Dummy
-          --disable-render-loop
+          -s res://addons/gut/gut_cmdln.gd   # script CLI de GUT :contentReference[oaicite:1]{index=1}
           --path .
-          -s res://addons/gut/gut_cmdln.gd
           -gtest=res://tests/auth_utils_tests.gd
           -gexit
