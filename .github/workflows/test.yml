@@ -21,4 +21,6 @@ jobs:
           unzip godot.zip -d godot
           chmod +x godot/Godot_v4.5-stable_linux.x86_64
       - name: Ejecuta tests GUT
-        run: xvfb-run godot/Godot_v4.5-stable_linux.x86_64 --headless --script addons/gut/gut_cmdln.gd -gdir=res://tests/
+        run: |
+          cd avatars-vs-rooks
+          xvfb-run godot/Godot_v4.5-stable_linux.x86_64 --headless --script addons/gut/gut_cmdln.gd -gdir=res://tests/
