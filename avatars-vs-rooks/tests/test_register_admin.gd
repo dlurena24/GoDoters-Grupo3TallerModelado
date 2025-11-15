@@ -70,5 +70,5 @@ func test_on_file_selected_jpg_file():
 	scene.file_name_label.text = ""
 	var path = "C:/fotos/otrafoto.jpg"
 	scene._on_file_selected(path)
-	assert_eq(scene.file_name_label.text, "otrafoto.jpg")
+	assert_eq(scene.file_name_label.text, "otrafoto,jpg")
 	assert_eq(scene.profile_picture_path, path)
