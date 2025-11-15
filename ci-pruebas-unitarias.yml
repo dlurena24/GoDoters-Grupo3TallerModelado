@@ -1,0 +1,56 @@
+name: Avatars vs Rooks - Pruebas Unitarias
+
+on:
+  push:
+    branches:
+      - NeyserPruebasUnitarias
+  pull_request:
+    branches:
+      - NeyserPruebasUnitarias
+
+jobs:
+  build:
+    name: Build (importar proyecto en Godot 4.5.1)
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.5.1
+          use-dotnet: false    # usamos la versión sin .NET :contentReference[oaicite:6]{index=6}
+
+      - name: Import project (headless)
+        run: |
+          godot --headless --path . --import --quit
+
+  test:
+    name: Run GUT tests
+    runs-on: ubuntu-22.04
+    needs: build
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.5.1
+          use-dotnet: false
+
+      - name: Run GUT tests (auth_utils_tests.gd)
+        env:
+          GODOT_DISABLE_LEAK_CHECKS: "1"
+        run: >
+          godot --headless
+          --display-driver headless
+          --audio-driver Dummy
+          --disable-render-loop
+          --path .
+          -s res://addons/gut/gut_cmdln.gd   # CLI de GUT :contentReference[oaicite:7]{index=7}
+          -gtest=res://tests/auth_utils_tests.gd
+          -gexit
