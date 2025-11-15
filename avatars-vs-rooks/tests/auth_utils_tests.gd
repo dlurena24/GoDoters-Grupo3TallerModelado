@@ -19,7 +19,7 @@ func test_validate_password_fuerte() -> void:
 
 	assert_true(result["ok"], "Una contraseña fuerte debería ser válida")
 	assert_eq(0, result["errors"].size(), "No debería devolver errores para una contraseña válida")
-
+ 
 
 # Debe rechazar una contraseña demasiado corta, pero que cumpla lo demás
 func test_validate_password_muy_corta() -> void:
