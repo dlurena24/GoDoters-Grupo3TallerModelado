@@ -25,7 +25,7 @@ jobs:
 
       - name: Open project (headless editor)
         run: |
-          godot --headless --editor --path avatars-vs-rooks --quit
+          godot --headless --path avatars-vs-rooks --import --quit
 
   test:
     name: Run GUT tests
@@ -47,7 +47,11 @@ jobs:
           GODOT_DISABLE_LEAK_CHECKS: "1"
         run: >
           godot --headless
+          --display-driver headless
+          --audio-driver Dummy
+          --disable-render-loop
           --path avatars-vs-rooks
           -s res://addons/gut/gut_cmdln.gd
           -gtest=res://tests/auth_utils_tests.gd
+          -glog=2
           -gexit
