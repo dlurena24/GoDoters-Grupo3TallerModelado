@@ -25,13 +25,12 @@ jobs:
         run: |
           cd avatars-vs-rooks-MainGame
           xvfb-run ../godot/Godot_v4.5-stable_linux.x86_64 --headless --import
-
+          
       - name: Ejecuta tests GUT
         run: |
           cd avatars-vs-rooks-MainGame
           xvfb-run ../godot/Godot_v4.5-stable_linux.x86_64 \
-          --headless \
-          --quit \
-          --script addons/gut/gut_cmdln.gd \
-          -gexit \
-          -gdir=res://
+            --headless \
+            --quit \
+            --script addons/gut/gut_cmdln.gd \
+            -gdir=res://tests/
