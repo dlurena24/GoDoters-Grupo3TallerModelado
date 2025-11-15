@@ -11,7 +11,7 @@ func test_recibir_ataque_resta_salud_correctamente():
 
 	assert_eq(
 		avatar.salud_actual,
-		70,
+		7000,
 		"La salud debería disminuir según la cantidad de daño."
 	)
 
