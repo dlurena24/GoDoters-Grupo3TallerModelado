@@ -21,11 +21,11 @@ jobs:
         uses: chickensoft-games/setup-godot@v2
         with:
           version: 4.5.1
-          use-dotnet: false   # binario de editor sin .NET :contentReference[oaicite:0]{index=0}
+          use-dotnet: false
 
       - name: Open project (headless editor)
         run: |
-          godot --headless --editor --path . --quit
+          godot --headless --editor --path avatars-vs-rooks --quit
 
   test:
     name: Run GUT tests
@@ -47,7 +47,7 @@ jobs:
           GODOT_DISABLE_LEAK_CHECKS: "1"
         run: >
           godot --headless
-          -s res://addons/gut/gut_cmdln.gd   # script CLI de GUT :contentReference[oaicite:1]{index=1}
-          --path .
+          --path avatars-vs-rooks
+          -s res://addons/gut/gut_cmdln.gd
           -gtest=res://tests/auth_utils_tests.gd
           -gexit
