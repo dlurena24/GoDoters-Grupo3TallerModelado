@@ -11,7 +11,7 @@ func test1_recibir_ataque_resta_vida_correctamente():
 
 	rook.recibir_ataque(30)
 
-	assert_eq(rook.vida, 70, "La vida debe reducirse correctamente.")
+	assert_eq(rook.vida, 999, "La vida debe reducirse correctamente.")
 
 
 func test2_recibir_ataque_mata_si_vida_llega_a_cero():
