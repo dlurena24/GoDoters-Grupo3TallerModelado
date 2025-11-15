@@ -23,7 +23,7 @@ jobs:
           version: 4.5.1
           use-dotnet: false
 
-      - name: Open project (headless editor)
+      - name: Import project (headless)
         run: |
           godot --headless --path avatars-vs-rooks --import --quit
 
@@ -41,6 +41,11 @@ jobs:
         with:
           version: 4.5.1
           use-dotnet: false
+
+      
+      - name: Import project (headless)
+        run: |
+          godot --headless --path avatars-vs-rooks --import --quit
 
       - name: Run GUT tests (auth_utils_tests.gd)
         env:
