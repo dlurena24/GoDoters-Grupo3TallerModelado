@@ -3,6 +3,7 @@ extends GutTest
 const AVATAR_SCRIPT = "res://Framework/Clases/Avatars/avatar.gd"
 
 func test_recibir_ataque_resta_salud_correctamente():
+	print("Test 1 avatar recibir ataque")
 	var avatar = load(AVATAR_SCRIPT).new()
 	avatar.salud_actual = 100
 
@@ -16,6 +17,8 @@ func test_recibir_ataque_resta_salud_correctamente():
 
 
 func test_recibir_ataque_no_muere_si_queda_salud():
+	print("Test 2 avatar recibir ataque")
+
 	var avatar = load(AVATAR_SCRIPT).new()
 	avatar.salud_actual = 50
 
@@ -33,6 +36,8 @@ func test_recibir_ataque_no_muere_si_queda_salud():
 
 
 func test_recibir_ataque_muere_si_salud_llega_a_cero():
+	print("Test 3 avatar recibir ataque")
+
 	var avatar = load(AVATAR_SCRIPT).new()
 	avatar.salud_actual = 10
 

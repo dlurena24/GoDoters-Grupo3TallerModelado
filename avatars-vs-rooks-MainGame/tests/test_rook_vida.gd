@@ -2,7 +2,9 @@ extends GutTest
 
 const ROOK_BASE_PATH = "res://Framework/Rook_Base.gd"
 
+
 func test1_recibir_ataque_resta_vida_correctamente():
+	print("Test 1 rook vida")
 	var script = load(ROOK_BASE_PATH)
 	assert_not_null(script)
 
@@ -15,6 +17,7 @@ func test1_recibir_ataque_resta_vida_correctamente():
 
 
 func test2_recibir_ataque_mata_si_vida_llega_a_cero():
+	print("Test 2 rook vida")
 	var script = load(ROOK_BASE_PATH)
 	assert_not_null(script)
 
@@ -30,6 +33,7 @@ func test2_recibir_ataque_mata_si_vida_llega_a_cero():
 
 
 func test3_recibir_ataque_no_mata_si_vida_es_mayor_a_cero():
+	print("Test 3 rook vida")
 	var script = load(ROOK_BASE_PATH)
 	assert_not_null(script)
 
