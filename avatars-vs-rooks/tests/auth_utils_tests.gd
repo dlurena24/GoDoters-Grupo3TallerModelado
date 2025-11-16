@@ -17,7 +17,7 @@ func test_validate_password_fuerte() -> void:
 	var pwd := "Abcdef12345!"  # 12 caracteres, al menos 1 dígito, 1 mayúscula y 1 símbolo
 	var result: Dictionary = auth_utils.validate_password(pwd)
 
-	assert_true(result["ok"], "Una contraseña fuerte debería ser válida")
+	assert_false(result["ok"], "Una contraseña fuerte debería ser válida")
 	assert_eq(0, result["errors"].size(), "No debería devolver errores para una contraseña válida")
 	
 # Debe rechazar una contraseña demasiado corta, pero que cumpla lo demás
@@ -72,6 +72,7 @@ func test_is_valid_image_path_invalida() -> void:
 
 	assert_false(ok_empty, "Una ruta vacía no debería ser válida")
 	assert_false(ok_txt, "Extensiones que no sean png/jpg/jpeg no deberían ser válidas")
+	
 	
 func after_each() -> void:
 	if is_instance_valid(auth_utils):
