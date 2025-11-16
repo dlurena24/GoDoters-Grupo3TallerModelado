@@ -2,7 +2,7 @@ extends Node
 
 const PROJECT_ID := "avatarsvsrooksproject"
 
-# --- Validación de contraseñas (ejemplo robusto) ---
+# --- Validación de contraseñas---
 func validate_password(pwd: String) -> Dictionary:
 	var errors: PackedStringArray = []
 	if pwd.length() < 12:
