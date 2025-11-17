@@ -1,13 +1,11 @@
 extends GutTest
-
 const admin_registerScript :=preload("res://scripts/admin_register.gd")
-
 var admin_reg
 func before_each()-> void:
 	admin_reg = admin_registerScript.new
 
-#pruebas de la funcion on_user_signed_up
-# Prueba la extracción de UID de diferentes formatos de datos
+# Pruebas de la funcion on_user_signed_up
+# Prueba 1 la extracción de UID de diferentes formatos de datos
 func test_uid_extraction_from_different_formats() -> void:
 	# Datos de prueba
 	var user_data_uid := {"uid": "test_uid_123"}
@@ -30,7 +28,7 @@ func test_uid_extraction_from_different_formats() -> void:
 	assert_eq(uid4, null, "Debería retornar null con diccionario vacío")
 	assert_eq(uid5, null, "Debería retornar null con claves inválidas")
 
-# Prueba validación de URL de descarga
+# Prueba 2 validación de URL de descarga
 func test_download_url_validation() -> void:
 	# URLs de prueba
 	var download_url_valid = "https://example.com/image.jpg"
@@ -42,7 +40,7 @@ func test_download_url_validation() -> void:
 	assert_false(download_url_empty != "", "URL vacía debería fallar la validación")
 	assert_true(download_url_invalid != "", "URL no vacía debería pasar validación básica")
 
-# Prueba conversión de UID a string
+# Prueba 3 conversión de UID a string
 func test_uid_string_conversion() -> void:
 	# Diferentes tipos de UID que podrían venir
 	var uid_string := "string_uid_123"
@@ -58,29 +56,8 @@ func test_uid_string_conversion() -> void:
 	assert_eq(result2, "12345", "Int UID debería convertirse a string")
 	assert_eq(result3, "123.45", "Float UID debería convertirse a string")
 
-# Prueba la extracción de UID con diferentes claves para Google Sign-In
-func test_uid_extraction_google_signin_variants() -> void:
-	# Configurar diferentes formatos de datos de Google Sign-In
-	var user_data_uid := {"uid": "google_uid_123"}
-	var user_data_localId := {"localId": "google_localId_456"} 
-	var user_data_localid := {"localid": "google_localid_789"}
-	var user_data_missing_uid := {"email": "test@example.com", "photoURL": "https://photo.jpg"}
-	
-	# Probar la lógica de extracción de UID directamente
-	var uid1 = user_data_uid.get("uid", user_data_uid.get("localId", user_data_uid.get("localid", null)))
-	var uid2 = user_data_localId.get("uid", user_data_localId.get("localId", user_data_localId.get("localid", null)))
-	var uid3 = user_data_localid.get("uid", user_data_localid.get("localId", user_data_localid.get("localid", null)))
-	var uid4 = user_data_missing_uid.get("uid", user_data_missing_uid.get("localId", user_data_missing_uid.get("localid", null)))
-	
-	# Verificar extracción de UID
-	assert_eq(uid1, "google_uid_123", "Debería extraer UID de clave 'uid' en Google Sign-In")
-	assert_eq(uid2, "google_localId_456", "Debería extraer UID de clave 'localId' en Google Sign-In")
-	assert_eq(uid3, "google_localid_789", "Debería extraer UID de clave 'localid' en Google Sign-In")
-	assert_eq(uid4, null, "Debería retornar null cuando faltan todas las claves UID")
-  
-
-#pruebas para la funcion on_user_signed_in
-# Prueba la lógica de selección de foto de perfil (local vs Google)
+# Pruebas para la funcion on_user_signed_in
+# Prueba 1 lógica de selección de foto de perfil (local vs Google)
 func test_profile_picture_selection_logic() -> void:
 	# Caso 1: Con foto local (debe generar path de storage)
 	var profile_picture_path_local = "user://photos/avatar.png"
@@ -106,7 +83,7 @@ func test_profile_picture_selection_logic() -> void:
 	assert_eq(download_url_empty_path, "https://google.com/photo.jpg", "Debería usar photourl de Google cuando no hay foto local")
 	assert_eq(download_url_no_photo, "", "Debería retornar string vacío sin fotos locales ni de Google")
 
-# Prueba la construcción de datos para Firestore con diferentes escenarios
+# Prueba 2 construcción de datos para Firestore con diferentes escenarios
 func test_firestore_data_construction() -> void:
 	# Configurar datos de prueba
 	var uid = "test_uid_123"
@@ -136,6 +113,25 @@ func test_firestore_data_construction() -> void:
 	assert_eq(firestore_data["profile_picture_path"], "profile_pictures/test_uid_123/avatar.png", "Debería generar path cuando hay foto local")
 	assert_eq(firestore_data["role"], "admin", "Rol siempre debería ser 'admin'")
 
+# Prueba 3 extracción de UID con diferentes claves para Google Sign-In
+func test_uid_extraction_google_signin_variants() -> void:
+	# Configurar diferentes formatos de datos de Google Sign-In
+	var user_data_uid := {"uid": "google_uid_123"}
+	var user_data_localId := {"localId": "google_localId_456"} 
+	var user_data_localid := {"localid": "google_localid_789"}
+	var user_data_missing_uid := {"email": "test@example.com", "photoURL": "https://photo.jpg"}
+	
+	# Probar la lógica de extracción de UID directamente
+	var uid1 = user_data_uid.get("uid", user_data_uid.get("localId", user_data_uid.get("localid", null)))
+	var uid2 = user_data_localId.get("uid", user_data_localId.get("localId", user_data_localId.get("localid", null)))
+	var uid3 = user_data_localid.get("uid", user_data_localid.get("localId", user_data_localid.get("localid", null)))
+	var uid4 = user_data_missing_uid.get("uid", user_data_missing_uid.get("localId", user_data_missing_uid.get("localid", null)))
+	
+	# Verificar extracción de UID
+	assert_eq(uid1, "google_uid_123", "Debería extraer UID de clave 'uid' en Google Sign-In")
+	assert_eq(uid2, "google_localId_456", "Debería extraer UID de clave 'localId' en Google Sign-In")
+	assert_eq(uid3, "google_localid_789", "Debería extraer UID de clave 'localid' en Google Sign-In")
+	assert_eq(uid4, null, "Debería retornar null cuando faltan todas las claves UID")
 func after_each() -> void:
 	if is_instance_id_valid(admin_reg):
 		admin_reg.free()
