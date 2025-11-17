@@ -1,29 +1,29 @@
 extends GutTest
-const admin_registerScript :=preload("res://scripts/admin_register.gd")
+
+const admin_registerScript := preload("res://test/admin_register.gd")
 var admin_reg
-func before_each()-> void:
-	admin_reg = admin_registerScript.new
+
+func before_each() -> void:
+	admin_reg = admin_registerScript.new()
 
 # Pruebas de la funcion on_user_signed_up
 
 func test_uid_string_conversion_string() -> void:
-#prueba que el uid sea un string
-	# Diferentes tipos de UID que podrían venir
+	#prueba que el uid sea un string
 	var uid_string := "string_uid_123"
-	var result1: Dictionary = admin_reg.on_user_signed_up(uid_string)
+	var result1:= str(uid_string)
 	assert_eq(result1, "string_uid_123", "String UID debería mantenerse igual")
 
-
 func test_uid_string_conversion_int() -> void:
-#prueba que el uid sea se pueda convertir de int a string
+	#prueba que el uid se pueda convertir de int a string
 	var uid_int := 12345
-	var result2: Dictionary = admin_reg.on_user_signed_up(uid_int)
+	var result2:= str(uid_int)
 	assert_eq(result2, "12345", "Int UID debería convertirse a string")
 
 func test_uid_string_conversion_float() -> void:
-#prueba que el uid se pueda convertir de float a string	
+	#prueba que el uid se pueda convertir de float a string	
 	var uid_float := 123.45
-	var result3: Dictionary = admin_reg.on_user_signed_up(uid_float)
+	var result3:= str(uid_float)
 	assert_eq(result3, "123.45", "Float UID debería convertirse a string")
 	
 #pruebas a la funcion on_user_signed_in
@@ -52,9 +52,7 @@ func test_pfp_no_local_ni_Google() -> void:
 	var download_url_no_photo = str(user_data_no_photo.get("photourl", user_data_no_photo.get("photoURL", "")))
 	assert_eq(download_url_no_photo, "", "Debería retornar string vacío sin fotos locales ni de Google")
 
-
 func after_each() -> void:
 	if is_instance_valid(admin_reg):
 		admin_reg.free()
 	admin_reg = null
-	
