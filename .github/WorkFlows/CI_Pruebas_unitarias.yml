@@ -1,4 +1,4 @@
-name: Avatars vs Rooks - Pruebas Unitarias
+name: CI_Pruebas Unitarias
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Build (verificar proyecto Godot)
+    name: Build (verificacion proyecto Godot)
     runs-on: ubuntu-22.04
 
     steps:
