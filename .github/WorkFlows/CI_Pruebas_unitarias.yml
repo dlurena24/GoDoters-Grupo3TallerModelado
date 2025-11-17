@@ -1,0 +1,62 @@
+name: Avatars vs Rooks - Pruebas Unitarias
+
+on:
+  push:
+    branches:
+      - MariaPruebasUnitarias
+  pull_request:
+    branches:
+      - MariaPruebasUnitarias
+
+jobs:
+  build:
+    name: Build (verificar proyecto Godot)
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.5.1
+          use-dotnet: false
+
+      - name: Import project (headless)
+        run: |
+          godot --headless --path avatars-vs-rooks --import --quit
+
+  test:
+    name: Run GUT tests
+    runs-on: ubuntu-22.04
+    needs: build
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.5.1
+          use-dotnet: false
+
+      
+      - name: Import project (headless)
+        run: |
+          godot --headless --path avatars-vs-rooks --import --quit
+
+      - name: Run GUT tests (auth_utils_tests.gd)
+        env:
+          GODOT_DISABLE_LEAK_CHECKS: "1"
+        run: >
+          godot --headless
+          --display-driver headless
+          --audio-driver Dummy
+          --disable-render-loop
+          --path avatars-vs-rooks
+          -s res://addons/gut/gut_cmdln.gd
+          -gtest=res://tests/auth_utils_tests.gd
+          -glog=2
+          -gexit
