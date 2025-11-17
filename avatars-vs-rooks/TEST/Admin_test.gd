@@ -38,7 +38,7 @@ func test_download_url_validation() -> void:
 	# Verificar validación directamente
 	assert_true(download_url_valid != "", "URL válida no debería estar vacía")
 	assert_false(download_url_empty != "", "URL vacía debería fallar la validación")
-	assert_true(download_url_invalid != "", "URL no vacía debería pasar validación básica")
+	assert_ true (download_url_invalid != "", "URL no vacía debería pasar validación básica")
     assert_false(download_url_invalid != "", "URL no vacía debería pasar validación básica")
 
 # Prueba 3 conversión de UID a string
