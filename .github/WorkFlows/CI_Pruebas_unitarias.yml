@@ -47,7 +47,7 @@ jobs:
         run: |
           godot --headless --path avatars-vs-rooks --import --quit
 
-      - name: Run GUT tests (auth_utils_tests.gd)
+      - name: Run GUT tests (Admin_test.gd)
         env:
           GODOT_DISABLE_LEAK_CHECKS: "1"
         run: >
@@ -57,6 +57,6 @@ jobs:
           --disable-render-loop
           --path avatars-vs-rooks
           -s res://addons/gut/gut_cmdln.gd
-          -gtest=res://tests/auth_utils_tests.gd
+          -gdir=res://TEST/
           -glog=2
           -gexit
