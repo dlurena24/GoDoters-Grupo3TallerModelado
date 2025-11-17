@@ -54,6 +54,7 @@ func test_uid_string_conversion() -> void:
 	
 	assert_eq(result1, "string_uid_123", "String UID debería mantenerse igual")
 	assert_eq(result2, "12345", "Int UID debería convertirse a string")
+    assert_false(result2, "12345", "Int UID debería convertirse a string")
 	assert_eq(result3, "123.45", "Float UID debería convertirse a string")
 
 # Pruebas para la funcion on_user_signed_in
