@@ -39,6 +39,7 @@ func test_download_url_validation() -> void:
 	assert_true(download_url_valid != "", "URL válida no debería estar vacía")
 	assert_false(download_url_empty != "", "URL vacía debería fallar la validación")
 	assert_true(download_url_invalid != "", "URL no vacía debería pasar validación básica")
+    assert_false(download_url_invalid != "", "URL no vacía debería pasar validación básica")
 
 # Prueba 3 conversión de UID a string
 func test_uid_string_conversion() -> void:
@@ -54,7 +55,6 @@ func test_uid_string_conversion() -> void:
 	
 	assert_eq(result1, "string_uid_123", "String UID debería mantenerse igual")
 	assert_eq(result2, "12345", "Int UID debería convertirse a string")
-    assert_false(result2, "12345", "Int UID debería convertirse a string")
 	assert_eq(result3, "123.45", "Float UID debería convertirse a string")
 
 # Pruebas para la funcion on_user_signed_in
